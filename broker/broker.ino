@@ -13,6 +13,7 @@ const char *topic = "esp32/led";
 const char *mqtt_username = "emqx";
 const char *mqtt_password = "public";
 const int mqtt_port = 1883;
+int count = 0;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -62,11 +63,15 @@ void callback(char *topic, byte *payload, unsigned int length) {
  Serial.print(message);
  //client.publish(topic, "9");
  if (message == "off") { digitalWrite(LED, LOW); }   // LED on
- if (message == "on") { digitalWrite(LED, HIGH); } // LED off
+ if (message == "1") { digitalWrite(LED, HIGH); } // LED off
  Serial.println();
  Serial.println("-----------------------");
 }
 
 void loop() {
  client.loop();
+ if (count == 0){
+   client.publish(topic, "testing");
+   count++;
+ }
 }

@@ -10,7 +10,7 @@
 #define PAYLOAD     "Hello World!"
 #define QOS         1
 #define TIMEOUT     10000L
-char input[] = "testing";
+char input[] = "0";
 
 int main(int argc, char* argv[])
 {
@@ -32,11 +32,13 @@ int main(int argc, char* argv[])
         printf("Failed to connect, return code %d\n", rc);
         exit(-1);
     }
-  
+    
+    //pubmsg.qos = QOS;
+    //pubmsg.retained = 0;
     // Publish message
-    for (int i = 0; i < 10;i++){
-        //printf("Please enter input:\n");
-        //scanf("%c", input[0]);
+    for (int i = 0; i < 5;i++){
+        printf("Please enter input:\n");
+        scanf("%c", input);
         //PAYLOAD = input[0];
         pubmsg.payload = input;
         pubmsg.payloadlen = strlen(input);
@@ -48,6 +50,7 @@ int main(int argc, char* argv[])
             (int)(TIMEOUT/1000), input, TOPIC, CLIENTID);
     rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
     printf("Message with delivery token %d delivered\n", token);
+        //printf("")
     }
     /*
     pubmsg.payload = PAYLOAD;

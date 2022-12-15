@@ -1,4 +1,4 @@
-//Tic Tac Toe game between 2 players or player vs computer
+//Tic Tac Toe game between 2 players
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -11,7 +11,8 @@ int terminate = 1; //1 = still going, 0 = terminate program
 
 int main(){
     
-    int choice, move1, move2; //holds the players choices and moves
+    int choice = 1;
+    int move1, move2; //holds the players choices and moves
     int player = 1; //keeps track of which player is making a move
     int tie = 1; // keeps track if there is a tie, 0 = no tie, 1 = tie
     int taken = 0; //keeps track if a spot is taken for the computer's turn, 1 = not taken, 0 = taken
@@ -24,13 +25,13 @@ int main(){
 
         printf("\n================================");
         printf("\nWELCOME TO TIC TAC TOE!");
-        printf("\n1 --- person vs. person");
-        printf("\n2 --- person vs. random computer");
-        printf("\nEnter your choice (1 or 2): ");
+        //printf("\n1 --- person vs. person");
+        //printf("\n2 --- person vs. random computer");
+        //printf("\nEnter your choice (1 or 2): ");
 
         //read information from console 
 
-        scanf("%d", &choice);
+        //scanf("%d", &choice);
 
         //Begin whichever version of the game is chosen
 

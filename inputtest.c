@@ -11,6 +11,7 @@
 #define QOS         1
 #define TIMEOUT     10000L
 char input[] = "0";
+int count = 0;
 
 int main(int argc, char* argv[])
 {
@@ -36,10 +37,19 @@ int main(int argc, char* argv[])
     //pubmsg.qos = QOS;
     //pubmsg.retained = 0;
     // Publish message
-    for (int i = 0; i < 5;i++){
+    while (count < 9){
         printf("Please enter input:\n");
         scanf("%c", input);
         //PAYLOAD = input[0];
+        /*
+        if (input == "1" || input == "2" || input == "3" || input == "4" || input == "5" || input == "6" || input == "7" || input == "8" || input == "9"){
+            count++;
+        }
+        */
+       if (strcmp(input, "1") == 0 ||strcmp(input, "2") == 0 ||strcmp(input, "3") == 0 ||strcmp(input, "4") == 0 ||strcmp(input, "5") == 0 ||strcmp(input, "6") == 0 ||strcmp(input, "7") == 0 ||strcmp(input, "8") == 0 ||strcmp(input, "9") == 0){
+        count++;
+       }
+        printf("%d", count);
         pubmsg.payload = input;
         pubmsg.payloadlen = strlen(input);
         pubmsg.qos = QOS;

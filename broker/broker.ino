@@ -2,6 +2,14 @@
 #include <PubSubClient.h>
 
 #define LED 23
+#define LED2    22
+#define LED3  21
+#define LED4  14
+#define LED5  12
+#define LED6  32
+#define LED7  33
+#define LED8  25
+#define LED9  26
 
 // WiFi
 const char *ssid = "LA500"; // Enter your WiFi name
@@ -20,6 +28,14 @@ PubSubClient client(espClient);
 
 void setup() {
   pinMode(LED, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
+  pinMode(LED5, OUTPUT);
+  pinMode(LED6, OUTPUT);
+  pinMode(LED7, OUTPUT);
+  pinMode(LED8, OUTPUT);
+  pinMode(LED9, OUTPUT);
  // Set software serial baud to 115200;
  Serial.begin(115200);
  // connecting to a WiFi network
@@ -64,6 +80,14 @@ void callback(char *topic, byte *payload, unsigned int length) {
  //client.publish(topic, "9");
  if (message == "off") { digitalWrite(LED, LOW); }   // LED on
  if (message == "1") { digitalWrite(LED, HIGH); } // LED off
+ if (message == "2") { digitalWrite(LED2, HIGH); }
+ if (message == "3") { digitalWrite(LED3, HIGH); }
+ if (message == "4") { digitalWrite(LED4, HIGH); }
+ if (message == "5") { digitalWrite(LED5, HIGH); }
+ if (message == "6") { digitalWrite(LED6, HIGH); }
+ if (message == "7") { digitalWrite(LED7, HIGH); }
+ if (message == "8") { digitalWrite(LED8, HIGH); }
+ if (message == "9") { digitalWrite(LED9, HIGH); }
  Serial.println();
  Serial.println("-----------------------");
 }

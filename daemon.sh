@@ -1,8 +1,8 @@
 #!/bin/bash
-INPUT=""
+INPUT="sub.out"
 while true
 do
-     | while read -r payload
+    $INPUT | while read -r payload
     do
         if [[ "$payload" == "1" ]]; then
             echo "Input detected"

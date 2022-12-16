@@ -58,7 +58,7 @@ int main(int argc, char* argv[]){
         exit(-1);
     }
     
-    int choice = 1;
+    int choice = 2;
     //char input1[] = "00";
     //char input2[] = "00";
     int move1, move2; //holds the players choices and moves
@@ -74,19 +74,9 @@ int main(int argc, char* argv[]){
 
         printf("\n================================");
         printf("\nWELCOME TO TIC TAC TOE!");
-        //printf("\n1 --- person vs. person");
-        //printf("\n2 --- person vs. random computer");
-        //printf("\nEnter your choice (1 or 2): ");
-
-        //read information from console 
-
-        //scanf("%d", &choice);
-
-        //Begin whichever version of the game is chosen
 
         if (choice == 1){
             printf("\n================================");
-            //printf("\nYou have entered choice 1");
 
             //Have a loop that continues to display the board until a winner or tie occurs
             while (playing == 1){

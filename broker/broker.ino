@@ -79,15 +79,15 @@ void callback(char *topic, byte *payload, unsigned int length) {
  Serial.print(message);
  //client.publish(topic, "9");
  if (message == "off") { digitalWrite(LED, LOW); }   // LED on
- if (message == "1") { digitalWrite(LED, HIGH); } // LED off
- if (message == "2") { digitalWrite(LED2, HIGH); }
- if (message == "3") { digitalWrite(LED3, HIGH); }
- if (message == "4") { digitalWrite(LED4, HIGH); }
- if (message == "5") { digitalWrite(LED5, HIGH); }
- if (message == "6") { digitalWrite(LED6, HIGH); }
- if (message == "7") { digitalWrite(LED7, HIGH); }
- if (message == "8") { digitalWrite(LED8, HIGH); }
- if (message == "9") { digitalWrite(LED9, HIGH); }
+ if (message == "10") { digitalWrite(LED, HIGH); } // LED off
+ if (message == "20") { digitalWrite(LED2, HIGH); }
+ if (message == "30") { digitalWrite(LED3, HIGH); }
+ if (message == "40") { digitalWrite(LED4, HIGH); }
+ if (message == "50") { digitalWrite(LED5, HIGH); }
+ if (message == "60") { digitalWrite(LED6, HIGH); }
+ if (message == "70") { digitalWrite(LED7, HIGH); }
+ if (message == "80") { digitalWrite(LED8, HIGH); }
+ if (message == "90") { digitalWrite(LED9, HIGH); }
  Serial.println();
  Serial.println("-----------------------");
 }

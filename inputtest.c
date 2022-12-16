@@ -15,8 +15,8 @@ int count = 0;
 
 int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message)
 {
-    printf("Message arrived\n");
-    printf("     topic: %s\n", topicName);
+    //printf("Message arrived\n");
+    //printf("     topic: %s\n", topicName);
     printf("   message: %.*s\n", message->payloadlen, (char*)message->payload);
     MQTTClient_freeMessage(&message);
     MQTTClient_free(topicName);
@@ -29,11 +29,15 @@ int main(int argc, char* argv[])
     MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
     MQTTClient_deliveryToken token;
+    //MQTTClient_setCallbacks(client, NULL, NULL, msgarrvd, NULL);
+    //MQTTClient_subscribe(client, TOPIC, QOS);
     int rc;
 
     MQTTClient_create(&client, ADDRESS, CLIENTID,
         MQTTCLIENT_PERSISTENCE_NONE, NULL);
-  
+    
+    MQTTClient_setCallbacks(client, NULL, NULL, msgarrvd, NULL);
+    MQTTClient_subscribe(client, TOPIC, QOS);
     // MQTT Connection parameters
     conn_opts.keepAliveInterval = 20;
     conn_opts.cleansession = 1;

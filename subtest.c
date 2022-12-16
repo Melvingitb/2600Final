@@ -10,6 +10,7 @@
 #define QOS         1
 #define TIMEOUT     10000L
 
+char input[] = "00";
 volatile MQTTClient_deliveryToken deliveredtoken;
 
 void delivered(void *context, MQTTClient_deliveryToken dt)
@@ -22,7 +23,9 @@ int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *m
 {
     printf("Message arrived\n");
     printf("     topic: %s\n", topicName);
-    printf("   message: %.*s\n", message->payloadlen, (char*)message->payload);
+    printf("   message: \n%.*s\n", message->payloadlen, (char*)message->payload);
+    //input = (char*)message;
+    //printf(input);
     MQTTClient_freeMessage(&message);
     MQTTClient_free(topicName);
     return 1;

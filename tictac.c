@@ -18,16 +18,35 @@ void prntbrd();
 char board[3][3] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 int playing = 1; //1 = playing, 0 = game ended
 int terminate = 1; //1 = still going, 0 = terminate program
+char input1[] = "00";
+char input2[] = "00";
+
+int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message)
+{
+    //printf("Message arrived\n");
+    //printf("     topic: %s\n", topicName);
+    printf("message: \n%.*s\n", message->payloadlen, (char*)message->payload);
+
+    
+    MQTTClient_freeMessage(&message);
+    MQTTClient_free(topicName);
+    return 1;
+}
 
 int main(int argc, char* argv[]){
     MQTTClient client;
     MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
     MQTTClient_deliveryToken token;
+    //MQTTClient_setCallbacks(client, NULL, NULL, msgarrvd, NULL);
+    //MQTTClient_subscribe(client, TOPIC, QOS);
     int rc;
 
     MQTTClient_create(&client, ADDRESS, CLIENTID,
         MQTTCLIENT_PERSISTENCE_NONE, NULL);
+    
+    MQTTClient_setCallbacks(client, NULL, NULL, msgarrvd, NULL);
+    MQTTClient_subscribe(client, TOPIC, QOS);
   
     // MQTT Connection parameters
     conn_opts.keepAliveInterval = 20;
@@ -40,6 +59,8 @@ int main(int argc, char* argv[]){
     }
     
     int choice = 1;
+    //char input1[] = "00";
+    //char input2[] = "00";
     int move1, move2; //holds the players choices and moves
     int player = 1; //keeps track of which player is making a move
     int tie = 1; // keeps track if there is a tie, 0 = no tie, 1 = tie
@@ -71,9 +92,33 @@ int main(int argc, char* argv[]){
             while (playing == 1){
                 prntbrd();
 
-                printf("\nPlayer%d: make your move", player);
+                printf("\nPlayer%d: make your move\n", player);
 
-                scanf("%d %d", &move1, &move2);
+                if(player % 2 == 1){
+                    printf("Waiting on ESP32 Input...\n\n"
+           "Press Q<Enter> to quit\n\n");
+    if ((rc = MQTTClient_subscribe(client, TOPIC, QOS)) != MQTTCLIENT_SUCCESS)
+    {
+    	printf("Failed to subscribe, return code %d\n", rc);
+    	rc = EXIT_FAILURE;
+    }
+    else
+    {
+    	int ch;
+    	do
+    	{
+        	ch = getchar();
+    	} while (ch!='Q' && ch != 'q');
+                }
+                player++;
+                terminate = 0;
+                playing = 0;
+                }
+                else{
+                    scanf("%d %d", &move1, &move2);
+                }
+
+                //scanf("%d %d", &move1, &move2);
 
                 //verify user input and determine which player is which
                 if(player % 2 == 1 && board[move1 - 1][move2 - 1] == ' '){
